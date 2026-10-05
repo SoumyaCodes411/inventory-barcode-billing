@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>I am a Template</h1>
+    <form action="/ins/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p>Name</p>
+        <p><input type="text" name="nm"/></p>
+
+        <p>Email</p>
+        <p><input type="email" name="email"/></p>
+
+        <p>Image</p>
+        <p><input type="file" name="simg"/></p>
+
+        <p>Date of Birth</p>
+        <p><input type="date" name="dob"/></p>
+        <p>Gender</p>
+        <p><label><input type="radio" name="gender" value="Male"/>Male</label></p>
+        <p><label><input type="radio" name="gender" value="Femle"/>Femle</label></p>
+        
+        <p>Stream</p>
+        <p>
+            <select name="stream">
+                <option value="">-Select Stream-</option>
+                <option value="CSE">CSE</option>
+                <option value="ECE">ECE</option>
+                <option value="IT">IT</option>
+            </select>
+        </p>
+
+        <p>Password</p>
+        <p><input type="password" name="pass"/></p>
+
+        <p><input type="submit" name="save" value="Add student"/></p>
+    </form>
+</body>
+</html>

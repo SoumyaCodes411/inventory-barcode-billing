@@ -1,0 +1,157 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FoodieHub - Barcode Billing Counter</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'css/master.css' %}" />
+  </head>
+  <body class="bg-light">
+    <!-- Counter Navbar -->
+    <nav class="navbar navbar-dark bg-success py-2 shadow-sm">
+      <div class="container">
+        <span class="navbar-brand fw-bold fs-4">FoodieHub POS Counter</span>
+        <div class="d-flex gap-2">
+          <a href="/shop/" class="btn btn-outline-light btn-sm">Shop View</a>
+          <a href="/dashboard/" class="btn btn-warning btn-sm fw-bold"
+            >Admin Dashboard</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <div class="container py-4">
+      {% if error %}
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Notice:</strong> {{ error }}
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+      {% endif %}
+
+      <!-- Barcode Input Box (Scanner reads directly into this) -->
+      <div
+        class="card shadow-sm border-0 mb-4 p-3 border-start border-success border-4"
+      >
+        <form
+          action="/scan_barcode/"
+          method="POST"
+          class="row g-2 align-items-center"
+        >
+          {% csrf_token %}
+          <div class="col-md-3">
+            <label class="form-label fw-bold mb-0 text-success fs-5"
+              >📷 Scan Barcode:</label
+            >
+          </div>
+          <div class="col-md-7">
+            <input
+              type="text"
+              name="barcode"
+              id="barcodeField"
+              class="form-control form-control-lg border-success"
+              placeholder="Scan barcode or type barcode number & hit Enter..."
+              autofocus
+              autocomplete="off"
+              required
+            />
+          </div>
+          <div class="col-md-2">
+            <button type="submit" class="btn btn-success btn-lg w-100 fw-bold">
+              Add
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Live Scanned Items Table -->
+      <div class="card shadow-sm border-0">
+        <div
+          class="card-header bg-white py-3 d-flex justify-content-between align-items-center"
+        >
+          <h5 class="mb-0 fw-bold">Scanned Items in Cart</h5>
+          <span class="badge bg-secondary fs-6">{{ items|length }} Items</span>
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-hover table-striped mb-0 align-middle">
+              <thead class="table-dark">
+                <tr>
+                  <th>#</th>
+                  <th>Barcode</th>
+                  <th>Item Name</th>
+                  <th>Price (Rs.)</th>
+                  <th class="text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in items %}
+                <tr>
+                  <td>{{ forloop.counter }}</td>
+                  <td>
+                    <span class="badge bg-light text-dark border"
+                      >{{ item.1 }}</span
+                    >
+                  </td>
+                  <td class="fw-semibold">{{ item.2 }}</td>
+                  <td class="fw-bold text-success">{{ item.3 }}</td>
+                  <td class="text-center">
+                    <a
+                      href="/delete_cart_item/{{ item.0 }}/"
+                      class="btn btn-sm btn-outline-danger"
+                      >Remove</a
+                    >
+                  </td>
+                </tr>
+                {% empty %}
+                <tr>
+                  <td colspan="5" class="text-center py-5 text-muted">
+                    <p class="fs-5 mb-1">No items scanned yet.</p>
+                    <small
+                      >Point your barcode scanner at a product barcode or type
+                      it in above.</small
+                    >
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div
+          class="card-footer bg-white p-3 d-flex justify-content-between align-items-center"
+        >
+          <h3 class="mb-0">
+            Grand Total:
+            <span class="text-success fw-bold">Rs. {{ grand_total }}</span>
+          </h3>
+          <a
+            href="/generate_bill/"
+            class="btn btn-success btn-lg px-4 fw-bold {% if not items %}disabled{% endif %}"
+          >
+            💳 Generate Bill
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Keep focus on the barcode field permanently for continuous scanning -->
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        const input = document.getElementById("barcodeField");
+        if (input) {
+          input.focus();
+        }
+      });
+    </script>
+  </body>
+</html>

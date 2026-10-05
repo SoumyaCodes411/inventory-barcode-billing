@@ -1,0 +1,125 @@
+{% load static %}
+<ul
+  class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+  id="accordionSidebar"
+>
+  <!-- Sidebar - Brand -->
+  <a
+    class="sidebar-brand d-flex align-items-center justify-content-center"
+    href="/dashboard/"
+  >
+    <div class="sidebar-brand-icon rotate-n-15">
+      <i class="fas fa-barcode"></i>
+    </div>
+    <div class="sidebar-brand-text mx-3">POS System</div>
+  </a>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider my-0" />
+
+  <!-- Nav Item - Dashboard -->
+  <li class="nav-item">
+    <a class="nav-link" href="/dashboard/">
+      <i class="fas fa-fw fa-tachometer-alt"></i>
+      <span>Dashboard</span>
+    </a>
+  </li>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider" />
+
+  <!-- Heading -->
+  <div class="sidebar-heading">Billing & Sales</div>
+
+  <!-- 1. POS Billing Menu -->
+  <li class="nav-item">
+    <a
+      class="nav-link collapsed"
+      href="#"
+      data-toggle="collapse"
+      data-target="#collapseBilling"
+      aria-expanded="true"
+      aria-controls="collapseBilling"
+    >
+      <i class="fas fa-fw fa-cash-register"></i>
+      <span>POS & Invoices</span>
+    </a>
+    <div
+      id="collapseBilling"
+      class="collapse"
+      aria-labelledby="headingBilling"
+      data-parent="#accordionSidebar"
+    >
+      <div class="bg-white py-2 collapse-inner rounded">
+        <a class="collapse-item" href="/billing/">POS Counter</a>
+        <a class="collapse-item" href="/listbills/">Sales Records</a>
+      </div>
+    </div>
+  </li>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider" />
+
+  <!-- Heading -->
+  <div class="sidebar-heading">Store Management</div>
+
+  <!-- 2. Manage Products Menu -->
+  <li class="nav-item">
+    <a
+      class="nav-link collapsed"
+      href="#"
+      data-toggle="collapse"
+      data-target="#collapseProducts"
+      aria-expanded="true"
+      aria-controls="collapseProducts"
+    >
+      <i class="fas fa-fw fa-box"></i>
+      <span>Manage Products</span>
+    </a>
+    <div
+      id="collapseProducts"
+      class="collapse"
+      aria-labelledby="headingProducts"
+      data-parent="#accordionSidebar"
+    >
+      <div class="bg-white py-2 collapse-inner rounded">
+        <a class="collapse-item" href="/addproduct/">Add Products</a>
+        <a class="collapse-item" href="/listproducts/">List Products</a>
+      </div>
+    </div>
+  </li>
+
+  <!-- 3. Manage Customers Menu -->
+  <li class="nav-item">
+    <a
+      class="nav-link collapsed"
+      href="#"
+      data-toggle="collapse"
+      data-target="#collapseCustomers"
+      aria-expanded="true"
+      aria-controls="collapseCustomers"
+    >
+      <i class="fas fa-fw fa-users"></i>
+      <span>Manage Customers</span>
+    </a>
+    <div
+      id="collapseCustomers"
+      class="collapse"
+      aria-labelledby="headingCustomers"
+      data-parent="#accordionSidebar"
+    >
+      <div class="bg-white py-2 collapse-inner rounded">
+        <a class="collapse-item" href="/addcustomer/">Add Customer</a>
+        <a class="collapse-item" href="/listcustomer/">List Customers</a>
+      </div>
+    </div>
+  </li>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider d-none d-md-block" />
+
+  <!-- Sidebar Toggler (Sidebar) -->
+  <div class="text-center d-none d-md-inline">
+    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+  </div>
+</ul>
